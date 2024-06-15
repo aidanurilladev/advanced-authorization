@@ -49,10 +49,10 @@ export const PrivateRouteProvider: FC<ProtectedRouteProps> = ({ children }) => {
 		}
 	};
 
-	useEffect(() => {
-		checkSession();
-		handleNavigation();
-	}, [status, pathname, navigate]);
+	// useEffect(() => {
+	// 	checkSession();
+	// 	handleNavigation();
+	// }, [status, pathname, navigate]);
 
 	return children;
 };
