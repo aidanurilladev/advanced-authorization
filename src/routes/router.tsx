@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
+import { PrivateRouteProvider } from '../providers/PrivateRouteProvider.tsx';
 import LayoutSide from '../pagesSide/components/layout/LayoutSide';
 import HomePage from '../pagesSide/pages/HomePage';
 import AboutPage from '../pagesSide/pages/AboutPage';
@@ -9,7 +10,11 @@ import RegistrationPage from '../pagesAuth/pages/RegistrationPage.tsx';
 export const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <LayoutSide />,
+		element: (
+			<PrivateRouteProvider>
+				<LayoutSide />
+			</PrivateRouteProvider>
+		),
 		children: [
 			{
 				path: '/',
@@ -23,7 +28,11 @@ export const router = createBrowserRouter([
 	},
 	{
 		path: '/auth',
-		element: <LayoutAuth />,
+		element: (
+			<PrivateRouteProvider>
+				<LayoutAuth />
+			</PrivateRouteProvider>
+		),
 		children: [
 			{
 				path: '/auth/login',

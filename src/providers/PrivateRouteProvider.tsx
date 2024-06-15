@@ -6,8 +6,6 @@ interface ProtectedRouteProps {
 	children: ReactNode;
 }
 
-const token = 'your_token_here';
-
 export const PrivateRouteProvider: FC<ProtectedRouteProps> = ({ children }) => {
 	const [status, setStatus] = useState('pending');
 	const { pathname } = useLocation();
@@ -16,10 +14,10 @@ export const PrivateRouteProvider: FC<ProtectedRouteProps> = ({ children }) => {
 	const checkSession = async () => {
 		try {
 			const response = await axios.get(
-				`${import.meta.env.VITE_BACKEND_URL}/auth/sign-in`,
+				`${import.meta.env.VITE_BACKEND_URL}/auth/user`,
 				{
 					headers: {
-						Authorization: `Bearer ${token}`
+						Authorization: `Bearer ${JSON.parse(String(localStorage.getItem('token')))}`
 					}
 				}
 			);
@@ -36,13 +34,12 @@ export const PrivateRouteProvider: FC<ProtectedRouteProps> = ({ children }) => {
 	const handleNavigation = () => {
 		switch (pathname) {
 			case '/auth/login':
+			case '/auth/registration':
 				if (status === 'fulfilled') {
-					navigate('/dashboard');
+					navigate('/');
 				}
 				break;
-			case '/dashboard':
-			case '/statistics':
-			case '/rating':
+			case '/':
 				if (status === 'rejected') {
 					navigate('/auth/login');
 				}
@@ -52,10 +49,10 @@ export const PrivateRouteProvider: FC<ProtectedRouteProps> = ({ children }) => {
 		}
 	};
 
-	// useEffect(() => {
-	// 	checkSession();
-	// 	handleNavigation();
-	// }, [status, pathname, navigate]);
+	useEffect(() => {
+		checkSession();
+		handleNavigation();
+	}, [status, pathname, navigate]);
 
 	return children;
 };
