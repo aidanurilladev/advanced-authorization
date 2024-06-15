@@ -35,7 +35,7 @@ export const PrivateRouteProvider: FC<ProtectedRouteProps> = ({ children }) => {
 
 	const handleNavigation = () => {
 		switch (pathname) {
-			case '/login':
+			case '/auth/login':
 				if (status === 'fulfilled') {
 					navigate('/dashboard');
 				}
@@ -44,7 +44,7 @@ export const PrivateRouteProvider: FC<ProtectedRouteProps> = ({ children }) => {
 			case '/statistics':
 			case '/rating':
 				if (status === 'rejected') {
-					navigate('/login');
+					navigate('/auth/login');
 				}
 				break;
 			default:
@@ -52,10 +52,10 @@ export const PrivateRouteProvider: FC<ProtectedRouteProps> = ({ children }) => {
 		}
 	};
 
-	useEffect(() => {
-		checkSession();
-		handleNavigation();
-	}, [status, pathname, navigate]);
+	// useEffect(() => {
+	// 	checkSession();
+	// 	handleNavigation();
+	// }, [status, pathname, navigate]);
 
 	return children;
 };
