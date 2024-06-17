@@ -25,4 +25,9 @@ namespace AUTH {
 		userName: string;
 		photo: string;
 	};
+
+	type PostLogoutResponse = {
+		message: string;
+	};
+	type PostLogoutRequest = void;
 }

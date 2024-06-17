@@ -1,16 +1,19 @@
 import scss from './Header.module.scss';
 import logo from '@/src/assets/logo.svg';
-import { Link, useNavigate } from 'react-router-dom';
-import { useGetMeQuery } from '@/src/redux/api/auth';
+import { Link } from 'react-router-dom';
+import { useGetMeQuery, usePostLogoutMutation } from '@/src/redux/api/auth';
 
 const Header = () => {
-	const { data, refetch } = useGetMeQuery();
-	const navigate = useNavigate();
+	const { data } = useGetMeQuery();
+	const [postLogoutMutation] = usePostLogoutMutation();
 
 	const logout = async () => {
-		localStorage.removeItem('accessToken');
-		await refetch();
-		navigate('/auth/login');
+		try {
+			localStorage.removeItem('accessToken');
+			await postLogoutMutation();
+		} catch (e) {
+			console.error(e);
+		}
 	};
 
 	return (

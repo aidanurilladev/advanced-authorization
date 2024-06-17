@@ -27,11 +27,21 @@ const api = index.injectEndpoints({
 				body: registrationData
 			}),
 			invalidatesTags: ['auth']
-		})
+		}),
+		postLogout: build.mutation<AUTH.PostLogoutResponse, AUTH.PostLogoutRequest>(
+			{
+				query: () => ({
+					url: '/auth/logout',
+					method: 'POST'
+				}),
+				invalidatesTags: ['auth']
+			}
+		)
 	})
 });
 export const {
 	useGetMeQuery,
 	usePostLoginMutation,
-	usePostRegistrationMutation
+	usePostRegistrationMutation,
+	usePostLogoutMutation
 } = api;
