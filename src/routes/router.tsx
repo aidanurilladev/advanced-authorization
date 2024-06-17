@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { PrivateRouteProvider } from '../providers/PrivateRouteProvider.tsx';
 import LayoutSide from '../pagesSide/components/layout/LayoutSide';
-import HomePage from '../pagesSide/pages/HomePage';
-import AboutPage from '../pagesSide/pages/AboutPage';
+import HomePage from '../pagesSide/components/pages/HomePage';
+import AboutPage from '../pagesSide/components/pages/AboutPage';
 import LayoutAuth from '../pagesAuth/components/layout/LayoutAuth.tsx';
-import LoginPage from '../pagesAuth/pages/LoginPage.tsx';
-import RegistrationPage from '../pagesAuth/pages/RegistrationPage.tsx';
+import LoginPage from '../pagesAuth/components/pages/LoginPage.tsx';
+import RegistrationPage from '../pagesAuth/components/pages/RegistrationPage.tsx';
 
 export const router = createBrowserRouter([
 	{

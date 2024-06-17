@@ -1,35 +1,15 @@
-import { FC, ReactNode, useEffect, useState } from 'react';
+import { FC, ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useGetMeQuery } from '../redux/api/me';
 
 interface ProtectedRouteProps {
 	children: ReactNode;
 }
 
 export const PrivateRouteProvider: FC<ProtectedRouteProps> = ({ children }) => {
-	const [status, setStatus] = useState('pending');
+	const { status } = useGetMeQuery();
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
-
-	const checkSession = async () => {
-		try {
-			const response = await axios.get(
-				`${import.meta.env.VITE_BACKEND_URL}/auth/user`,
-				{
-					headers: {
-						Authorization: `Bearer ${JSON.parse(String(localStorage.getItem('token')))}`
-					}
-				}
-			);
-			if (response.status === 200) {
-				setStatus('fulfilled');
-			} else {
-				setStatus('rejected');
-			}
-		} catch (error) {
-			setStatus('rejected');
-		}
-	};
 
 	const handleNavigation = () => {
 		switch (pathname) {
@@ -49,10 +29,9 @@ export const PrivateRouteProvider: FC<ProtectedRouteProps> = ({ children }) => {
 		}
 	};
 
-	// useEffect(() => {
-	// 	checkSession();
-	// 	handleNavigation();
-	// }, [status, pathname, navigate]);
+	useEffect(() => {
+		handleNavigation();
+	}, [status, pathname, navigate]);
 
 	return children;
 };

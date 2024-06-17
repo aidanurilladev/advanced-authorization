@@ -1,4 +1,4 @@
-import AboutUs from './aboutSections/AboutUs';
+import AboutUs from './aboutSections/AboutUs.tsx';
 
 const AboutPage = () => {
 	return (

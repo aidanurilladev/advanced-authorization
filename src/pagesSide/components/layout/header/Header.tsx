@@ -1,34 +1,16 @@
 import scss from './Header.module.scss';
 import logo from '../../../../assets/logo.svg';
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useGetMeQuery } from '../../../../redux/api/me';
 
 const Header = () => {
-	const [session, setSession] = useState(false);
+	const { data } = useGetMeQuery();
 	const navigate = useNavigate();
-
-	const checkSession = async () => {
-		try {
-			await axios.get(`${import.meta.env.VITE_BACKEND_URL}/auth/user`, {
-				headers: {
-					Authorization: `Bearer ${JSON.parse(String(localStorage.getItem('token')))}`
-				}
-			});
-			setSession(true);
-		} catch (error) {
-			setSession(false);
-		}
-	};
 
 	const logout = () => {
 		localStorage.removeItem('token');
 		navigate('/auth/login');
 	};
-
-	useEffect(() => {
-		checkSession();
-	}, []);
 
 	return (
 		<header className={scss.Header}>
@@ -38,7 +20,7 @@ const Header = () => {
 						<img src={logo} alt="logo" />
 					</div>
 					<div className={scss.auth}>
-						{session ? (
+						{data?.profile ? (
 							<>
 								<button className={scss.logout} onClick={logout}>
 									Logout
