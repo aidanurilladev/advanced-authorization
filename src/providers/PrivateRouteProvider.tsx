@@ -1,6 +1,6 @@
 import { FC, ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useGetMeQuery } from '../redux/api/me';
+import { useGetMeQuery } from '../redux/api/auth';
 
 interface ProtectedRouteProps {
 	children: ReactNode;
