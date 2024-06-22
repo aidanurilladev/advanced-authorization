@@ -10,9 +10,9 @@ import MyPublicPage from '@/src/pagesSide/components/pages/MyPublicPage.tsx';
 import LayoutAuth from '@/src/pagesAuth/components/layout/LayoutAuth.tsx';
 import LoginPage from '@/src/pagesAuth/components/pages/LoginPage.tsx';
 import RegistrationPage from '@/src/pagesAuth/components/pages/RegistrationPage.tsx';
+import ResetPasswordPage from '@/src/pagesAuth/components/pages/ResetPasswordPage.tsx';
 import ForgotPage from '@/src/pagesAuth/components/pages/ForgotPage.tsx';
 import { SessionProvider } from '@/src/providers/SessionProvider.tsx';
-import ResetPasswordPage from '@/src/pagesAuth/components/pages/ResetPasswordPage.tsx';
 
 export const router = createBrowserRouter([
 	{

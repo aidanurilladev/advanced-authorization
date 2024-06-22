@@ -19,7 +19,7 @@ const ProfileButton: FC<ProfileButtonProps> = ({ isOpen, setIsOpen, user }) => {
 					setIsOpen(!isOpen);
 				}}
 			>
-				<Avatar size={38} icon={<img src={user?.avatar} alt="avatar" />} />
+				<Avatar size={38} icon={<img src={user?.photo} alt="avatar" />} />
 				<p className={scss.name}>{user?.userName}</p>
 				<IconChevronUp
 					className={isOpen ? `${scss.arrow} ${scss.active}` : `${scss.arrow}`}

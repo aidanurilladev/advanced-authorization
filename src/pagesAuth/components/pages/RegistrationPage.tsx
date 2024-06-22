@@ -7,12 +7,11 @@ import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import logo from '@/src/assets/logo.png';
 
 interface IFormInput {
-	lastName: string;
-	firstName: string;
 	userName: string;
 	email: string;
 	password: string;
 	confirmPassword: string;
+	photo: string;
 }
 
 const InputField = ({ name, control, rules, placeholder, errors }: any) => (
@@ -59,20 +58,6 @@ const RegistrationForm = ({
 }: any) => (
 	<form onSubmit={handleSubmit(onSubmit)}>
 		<InputField
-			name="lastName"
-			control={control}
-			rules={{ required: true, minLength: 2 }}
-			placeholder="Фамилия"
-			errors={errors}
-		/>
-		<InputField
-			name="firstName"
-			control={control}
-			rules={{ required: true, minLength: 2 }}
-			placeholder="Имя"
-			errors={errors}
-		/>
-		<InputField
 			name="userName"
 			control={control}
 			rules={{ required: true, minLength: 2 }}
@@ -83,7 +68,14 @@ const RegistrationForm = ({
 			name="email"
 			control={control}
 			rules={{ required: true, minLength: 2, pattern: /^\S+@\S+\.\S+$/i }}
-			placeholder="Номер телефона или email"
+			placeholder="Email"
+			errors={errors}
+		/>
+		<InputField
+			name="photo"
+			control={control}
+			rules={{ required: true, minLength: 2 }}
+			placeholder="Фото URL"
 			errors={errors}
 		/>
 		<PasswordField
@@ -129,11 +121,10 @@ const RegistrationPage = () => {
 
 	const onSubmit: SubmitHandler<IFormInput> = async (userData) => {
 		const userDataRest = {
-			lastName: userData.lastName,
-			firstName: userData.firstName,
 			userName: userData.userName,
 			email: userData.email,
-			password: userData.password
+			password: userData.password,
+			photo: userData.photo
 		};
 
 		try {
@@ -152,7 +143,7 @@ const RegistrationPage = () => {
 
 	return (
 		<section className={scss.RegistrationPage}>
-			<div className={scss.container}>
+			<div className="container">
 				<div className={scss.content}>
 					<img className={scss.logo} src={logo} alt="logo" />
 					<RegistrationForm

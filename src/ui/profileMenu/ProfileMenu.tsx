@@ -15,6 +15,7 @@ interface ProfileMenuProps {
 	setIsOpen: (isOpen: boolean) => void;
 	pathname: string;
 	user: User | null;
+	logout: () => void;
 }
 
 const ProfileMenu: FC<ProfileMenuProps> = ({
@@ -22,14 +23,9 @@ const ProfileMenu: FC<ProfileMenuProps> = ({
 	isOpen,
 	setIsOpen,
 	pathname,
-	user
+	user,
+	logout
 }) => {
-	const logout = () => {
-		localStorage.removeItem('accessToken');
-		sessionStorage.removeItem('accessToken');
-		window.location.reload();
-	};
-
 	return (
 		<>
 			<div
@@ -40,12 +36,10 @@ const ProfileMenu: FC<ProfileMenuProps> = ({
 			>
 				<div className={scss.content}>
 					<div className={scss.user_profile}>
-						<Avatar size={50} icon={<img src={user?.avatar} alt="avatar" />} />
+						<Avatar size={50} icon={<img src={user?.photo} alt="avatar" />} />
 						<div className={scss.user_data}>
-							<p className={scss.user_name}>
-								{user?.firstName} {user?.lastName}
-							</p>
-							<p className={scss.user_email}>boss.armsport@gmail.com</p>
+							<p className={scss.user_name}>{user?.userName}</p>
+							<p className={scss.user_email}>{user?.email}</p>
 						</div>
 					</div>
 					<nav className={scss.nav} style={{ display: 'none' }}>

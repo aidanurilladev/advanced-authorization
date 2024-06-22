@@ -56,8 +56,8 @@ const LoginForm = ({
 		<InputField
 			name="email"
 			control={control}
-			rules={{ required: true, minLength: 2 }}
-			placeholder="Номер телефона, имя пользователя или email"
+			rules={{ required: true, minLength: 2, pattern: /^\S+@\S+\.\S+$/i }}
+			placeholder="Email"
 			errors={errors}
 		/>
 		<PasswordField
@@ -92,9 +92,12 @@ const LoginPage = () => {
 	const onSubmit: SubmitHandler<IFormInput> = async (userData) => {
 		try {
 			const response = await postLoginMutation(userData);
-			if (response.data?.token) {
+			if (response.data?.accessToken) {
 				const storage = rememberMe ? localStorage : sessionStorage;
-				storage.setItem('accessToken', JSON.stringify(response.data.token));
+				storage.setItem(
+					'accessToken',
+					JSON.stringify(response.data.accessToken)
+				);
 				window.location.reload();
 			}
 		} catch (e) {
@@ -104,7 +107,7 @@ const LoginPage = () => {
 
 	return (
 		<section className={scss.LoginPage}>
-			<div className={scss.container}>
+			<div className="container">
 				<div className={scss.content}>
 					<img className={scss.logo} src={logo} alt="logo" />
 					<LoginForm

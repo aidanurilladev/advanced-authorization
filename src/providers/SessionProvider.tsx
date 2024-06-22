@@ -30,7 +30,6 @@ export const SessionProvider: FC<SessionProviderProps> = ({ children }) => {
 	};
 
 	useEffect(() => {
-		console.log(window.location.href);
 		handleNavigation();
 	}, [status, pathname, navigate]);
 

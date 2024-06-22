@@ -23,6 +23,12 @@ const Header: FC<HeaderProps> = ({ isOpen, setIsOpen, isMobile, user }) => {
 	const onSearch: SearchProps['onSearch'] = (value, _e, info) =>
 		console.log(info?.source, value);
 
+	const logout = () => {
+		localStorage.removeItem('accessToken');
+		sessionStorage.removeItem('accessToken');
+		window.location.reload();
+	};
+
 	return (
 		<>
 			<header className={scss.Header}>
@@ -50,6 +56,7 @@ const Header: FC<HeaderProps> = ({ isOpen, setIsOpen, isMobile, user }) => {
 									setIsOpen={setIsOpen}
 									pathname={pathname}
 									user={user}
+									logout={logout}
 								/>
 							</>
 						) : (
@@ -60,6 +67,8 @@ const Header: FC<HeaderProps> = ({ isOpen, setIsOpen, isMobile, user }) => {
 									isOpen={isOpen}
 									setIsOpen={setIsOpen}
 									pathname={pathname}
+									user={user}
+									logout={logout}
 								/>
 							</>
 						)}

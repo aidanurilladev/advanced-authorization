@@ -14,13 +14,17 @@ interface BurgerMenuProps {
 	isOpen: boolean;
 	setIsOpen: (isOpen: boolean) => void;
 	pathname: string;
+	user: User | null;
+	logout: () => void;
 }
 
 const BurgerMenu: FC<BurgerMenuProps> = ({
 	siteLinks,
 	isOpen,
 	setIsOpen,
-	pathname
+	pathname,
+	user,
+	logout
 }) => {
 	return (
 		<>
@@ -32,18 +36,10 @@ const BurgerMenu: FC<BurgerMenuProps> = ({
 			>
 				<div className={scss.content}>
 					<div className={scss.user_profile}>
-						<Avatar
-							size={40}
-							icon={
-								<img
-									src="https://elcho.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Felcho911.eabc74a3.png&w=640&q=75"
-									alt="avatar"
-								/>
-							}
-						/>
+						<Avatar size={40} icon={<img src={user?.photo} alt="avatar" />} />
 						<div className={scss.user_data}>
-							<p className={scss.user_name}>Elcho911</p>
-							<p className={scss.user_email}>boss.armsport@gmail.com</p>
+							<p className={scss.user_name}>{user?.userName}</p>
+							<p className={scss.user_email}>{user?.email}</p>
 						</div>
 					</div>
 					<nav className={scss.nav}>
@@ -66,7 +62,7 @@ const BurgerMenu: FC<BurgerMenuProps> = ({
 						</ul>
 					</nav>
 					<div className={scss.auth}>
-						<button className={scss.logout}>
+						<button className={scss.logout} onClick={logout}>
 							<IconLogout stroke={2} /> Log Out
 						</button>
 					</div>
