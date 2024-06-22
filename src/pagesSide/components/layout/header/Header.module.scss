@@ -1,54 +1,48 @@
 .Header {
-	padding-block: 14px;
+	position: sticky;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	width: 100%;
+	background: var(--white);
+	padding-block: 10px;
+	border-bottom: 1px solid #e7e8ec;
+
 	.content {
+		position: relative;
 		display: flex;
+		gap: 20px;
 		justify-content: space-between;
 		align-items: center;
 		.logo {
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			img {
+				width: 160px;
+				height: 23px;
+			}
+			//h1 {
+			//	font-size: clamp(16px, 5vw, 26px);
+			//	font-weight: 500;
+			//	text-transform: uppercase;
+			//	span {
+			//		color: var(--purple);
+			//	}
+			//}
+		}
+		.search {
+			width: 100%;
+			max-width: 800px;
 		}
 		.auth {
 			display: flex;
-			gap: 20px;
+			gap: 25px;
 			justify-content: center;
 			align-items: center;
-			button {
-				padding: 8px 20px;
-			}
 			a {
-				padding: 8px 20px;
 				display: block;
-			}
-			.logout {
-				border-radius: 2px;
-				box-shadow: 0px 1px 3px 0px rgba(25, 32, 44, 0.04);
-				background: rgb(93, 93, 255);
-
-				font-size: 16px;
-				font-weight: 500;
-				line-height: 24px;
-				letter-spacing: -0.25px;
-				color: rgb(255, 255, 255);
-			}
-			.sign_in {
-				font-size: 16px;
-				font-weight: 500;
-				line-height: 24px;
-				letter-spacing: -0.25px;
-				color: rgb(93, 93, 255);
-			}
-			.sign_up {
-				border-radius: 2px;
-				box-shadow: 0px 1px 3px 0px rgba(25, 32, 44, 0.04);
-				background: rgb(93, 93, 255);
-
-				font-size: 16px;
-				font-weight: 500;
-				line-height: 24px;
-				letter-spacing: -0.25px;
-				color: rgb(255, 255, 255);
+				padding: 15px 10px;
 			}
 		}
 	}

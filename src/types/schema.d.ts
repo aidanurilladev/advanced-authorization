@@ -1,10 +1,7 @@
 interface User {
-	id: number;
+	id: string;
+	email: string;
 	userName: string;
-	role: string;
-	login: string;
-	password: string;
-	isActive: boolean;
 	photo: string;
 	createdAt: string;
 	updatedAt: string;

@@ -10,10 +10,10 @@ const api = index.injectEndpoints({
 			providesTags: ['auth']
 		}),
 		postLogin: build.mutation<AUTH.PostLoginResponse, AUTH.PostLoginRequest>({
-			query: (loginData) => ({
+			query: (data) => ({
 				url: '/auth/sign-in',
 				method: 'POST',
-				body: loginData
+				body: data
 			}),
 			invalidatesTags: ['auth']
 		}),
@@ -21,10 +21,10 @@ const api = index.injectEndpoints({
 			AUTH.PostRegistrationResponse,
 			AUTH.PostRegistrationRequest
 		>({
-			query: (registrationData) => ({
+			query: (data) => ({
 				url: '/auth/sign-up',
 				method: 'POST',
-				body: registrationData
+				body: data
 			}),
 			invalidatesTags: ['auth']
 		}),
@@ -36,12 +36,47 @@ const api = index.injectEndpoints({
 				}),
 				invalidatesTags: ['auth']
 			}
-		)
+		),
+		patchRefreshToken: build.mutation<
+			AUTH.PatchRefreshResponse,
+			AUTH.PatchRefreshRequest
+		>({
+			query: () => ({
+				url: '/auth/refresh',
+				method: 'PATCH'
+			}),
+			invalidatesTags: ['auth']
+		}),
+		postForgotPassword: build.mutation<
+			AUTH.PostForgotPasswordResponse,
+			AUTH.PostForgotPasswordRequest
+		>({
+			query: (data) => ({
+				url: '/auth/forgot',
+				method: 'POST',
+				body: data
+			}),
+			invalidatesTags: ['auth']
+		}),
+		patchResetPassword: build.mutation<
+			AUTH.PatchResetPasswordResponse,
+			AUTH.PatchResetPasswordRequest
+		>({
+			query: (data) => ({
+				url: '/auth/reset-password',
+				method: 'PATCH',
+				body: data
+			}),
+			invalidatesTags: ['auth']
+		})
 	})
 });
 export const {
 	useGetMeQuery,
 	usePostLoginMutation,
 	usePostRegistrationMutation,
-	usePostLogoutMutation
+	usePostLogoutMutation,
+	usePatchRefreshTokenMutation,
+	usePostForgotPasswordMutation,
+	usePatchResetPasswordMutation
 } = api;

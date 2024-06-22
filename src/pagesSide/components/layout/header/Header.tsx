@@ -1,49 +1,72 @@
+import { FC } from 'react';
 import scss from './Header.module.scss';
-import logo from '@/src/assets/logo.svg';
-import { Link } from 'react-router-dom';
-import { useGetMeQuery, usePostLogoutMutation } from '@/src/redux/api/auth';
+import { useLocation } from 'react-router-dom';
+import Search from 'antd/es/input/Search';
+import { SearchProps } from 'antd/lib/input';
+import { menuLinks, siteLinks } from '@/src/routes/links.tsx';
+import ProfileButton from '@/src/ui/profileButton/ProfileButton.tsx';
+import ProfileMenu from '@/src/ui/profileMenu/ProfileMenu.tsx';
+import BurgerButton from '@/src/ui/burgerButton/BurgerButton.tsx';
+import BurgerMenu from '@/src/ui/burgerMenu/BurgerMenu.tsx';
+import logo from '@/src/assets/logo.png';
 
-const Header = () => {
-	const { data } = useGetMeQuery();
-	const [postLogoutMutation] = usePostLogoutMutation();
+interface HeaderProps {
+	isOpen: boolean;
+	setIsOpen: (isOpen: boolean) => void;
+	isMobile: boolean;
+	user: User;
+}
 
-	const logout = async () => {
-		try {
-			localStorage.removeItem('accessToken');
-			await postLogoutMutation();
-		} catch (e) {
-			console.error(e);
-		}
-	};
+const Header: FC<HeaderProps> = ({ isOpen, setIsOpen, isMobile, user }) => {
+	const { pathname } = useLocation();
+
+	const onSearch: SearchProps['onSearch'] = (value, _e, info) =>
+		console.log(info?.source, value);
 
 	return (
-		<header className={scss.Header}>
-			<div className="container">
-				<div className={scss.content}>
-					<div className={scss.logo}>
-						<img src={logo} alt="logo" />
-					</div>
-					<div className={scss.auth}>
-						{data?.profile ? (
+		<>
+			<header className={scss.Header}>
+				<div className="container">
+					<div className={scss.content}>
+						<button className={scss.logo}>
+							<img src={logo} alt="logo" />
+						</button>
+						<Search
+							placeholder="input search text"
+							allowClear
+							onSearch={onSearch}
+							className={scss.search}
+						/>
+						{!isMobile ? (
 							<>
-								<button className={scss.logout} onClick={logout}>
-									Logout
-								</button>
+								<ProfileButton
+									isOpen={isOpen}
+									setIsOpen={setIsOpen}
+									user={user}
+								/>
+								<ProfileMenu
+									menuLinks={menuLinks}
+									isOpen={isOpen}
+									setIsOpen={setIsOpen}
+									pathname={pathname}
+									user={user}
+								/>
 							</>
 						) : (
 							<>
-								<Link to="/auth/login" className={scss.sign_in}>
-									Sign in
-								</Link>
-								<Link to="/auth/registration" className={scss.sign_up}>
-									Sign up
-								</Link>
+								<BurgerButton isOpen={isOpen} setIsOpen={setIsOpen} />
+								<BurgerMenu
+									siteLinks={siteLinks}
+									isOpen={isOpen}
+									setIsOpen={setIsOpen}
+									pathname={pathname}
+								/>
 							</>
 						)}
 					</div>
 				</div>
-			</div>
-		</header>
+			</header>
+		</>
 	);
 };
 

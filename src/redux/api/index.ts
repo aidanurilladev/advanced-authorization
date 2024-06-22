@@ -6,8 +6,12 @@ import {
 
 const baseQuery = fetchBaseQuery({
 	baseUrl: `${import.meta.env.VITE_PUBLIC_API_URL}/api/v1`,
+
 	prepareHeaders: (headers) => {
-		const token = JSON.parse(String(localStorage.getItem('accessToken')));
+		let token = JSON.parse(String(localStorage.getItem('accessToken')));
+		if (!token) {
+			token = JSON.parse(String(sessionStorage.getItem('accessToken')));
+		}
 		if (token) {
 			headers.set('Authorization', `Bearer ${token}`);
 		}

@@ -1,9 +1,7 @@
 .LayoutAuth {
 	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	justify-content: center;
+	align-items: center;
 	min-height: 100vh;
-	footer {
-		margin-top: auto;
-	}
+	background: url('../../../assets/auth_bg.png') no-repeat center/cover;
 }

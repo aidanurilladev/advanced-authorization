@@ -1,8 +1,28 @@
-.LayoutSide {
+.layout {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	min-height: 100vh;
+	main {
+		.content {
+			display: flex;
+			align-items: flex-start;
+			.side_bar {
+				position: sticky;
+				top: 59px;
+				margin-right: 20px;
+				padding: 10px 10px 10px 10px;
+				background: var(--white);
+				border-radius: 0px 0px 4px 4px;
+				border-left: 1px solid #e7e8ec;
+				border-right: 1px solid #e7e8ec;
+				border-bottom: 1px solid #e7e8ec;
+			}
+			.page_body {
+				width: 100%;
+			}
+		}
+	}
 	footer {
 		margin-top: auto;
 	}

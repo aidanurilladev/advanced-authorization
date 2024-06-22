@@ -1,14 +1,15 @@
+import { FC } from 'react';
 import scss from './Footer.module.scss';
 
-const Footer = () => {
+const Footer: FC = () => {
 	return (
-		<footer className={scss.Footer}>
-			<div className="container">
-				<div className={scss.content}>
-					<h1>Footer</h1>
+		<>
+			<footer className={scss.Footer}>
+				<div className="container">
+					<div className={scss.content}>Footer</div>
 				</div>
-			</div>
-		</footer>
+			</footer>
+		</>
 	);
 };
 

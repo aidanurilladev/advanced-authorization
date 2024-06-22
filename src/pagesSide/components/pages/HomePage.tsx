@@ -1,11 +1,11 @@
 import Welcome from './homeSections/Welcome.tsx';
-import Carousel from './homeSections/Carousel.tsx';
+import News from './homeSections/News.tsx';
 
 const HomePage = () => {
 	return (
 		<>
 			<Welcome />
-			<Carousel />
+			<News />
 		</>
 	);
 };

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 namespace AUTH {
 	type GetMeResponse = {
 		profile: User;
@@ -10,7 +9,7 @@ namespace AUTH {
 		accessTokenExpiration: number;
 	};
 	type PostLoginRequest = {
-		login: string;
+		email: string;
 		password: string;
 	};
 
@@ -20,7 +19,7 @@ namespace AUTH {
 		accessTokenExpiration: number;
 	};
 	type PostRegistrationRequest = {
-		login: string;
+		email: string;
 		password: string;
 		userName: string;
 		photo: string;
@@ -30,4 +29,26 @@ namespace AUTH {
 		message: string;
 	};
 	type PostLogoutRequest = void;
+
+	type PatchRefreshResponse = {
+		accessToken: string;
+		accessTokenExpiration: number;
+	};
+	type PatchRefreshRequest = void;
+
+	type PostForgotPasswordResponse = {
+		message: string;
+	};
+	type PostForgotPasswordRequest = {
+		email: string;
+		frontEndUrl: string;
+	};
+
+	type PatchResetPasswordResponse = {
+		message: string;
+	};
+	type PatchResetPasswordRequest = {
+		token: string;
+		newPassword: string;
+	};
 }
