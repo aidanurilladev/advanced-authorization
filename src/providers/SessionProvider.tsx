@@ -15,6 +15,8 @@ export const SessionProvider: FC<SessionProviderProps> = ({ children }) => {
 		switch (pathname) {
 			case '/auth/login':
 			case '/auth/registration':
+			case '/auth/reset-password':
+			case '/auth/forgot':
 				if (status === 'fulfilled') {
 					navigate('/');
 				}
