@@ -22,6 +22,11 @@ export const SessionProvider: FC<SessionProviderProps> = ({ children }) => {
 				}
 				break;
 			case '/':
+			case '/chats':
+			case '/notifications':
+			case '/settings':
+			case '/my-profile':
+			case '/my-public':
 				if (status === 'rejected') {
 					navigate('/auth/login');
 				}
