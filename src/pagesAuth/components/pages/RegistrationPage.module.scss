@@ -1,6 +1,5 @@
 .RegistrationPage {
 	padding: 65px 40px;
-
 	background: #fff;
 	border: 1px solid rgb(219, 219, 219);
 	border-radius: 8px;
@@ -10,11 +9,13 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+
 		.logo {
 			margin-bottom: 45px;
 			width: 180px;
 			height: 28px;
 		}
+
 		form {
 			width: 300px;
 			display: flex;
@@ -22,14 +23,35 @@
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
+
 			.input {
 				font-size: 12px;
 			}
+
 			.customCheckbox {
 				margin-right: auto;
 			}
+
 			button {
 				margin-top: 20px;
+			}
+		}
+
+		.links {
+			margin-top: 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 10px;
+
+			.link {
+				color: #1890ff;
+				text-decoration: none;
+				font-size: 14px;
+
+				&:hover {
+					text-decoration: underline;
+				}
 			}
 		}
 	}

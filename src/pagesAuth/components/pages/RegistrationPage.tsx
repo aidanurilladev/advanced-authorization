@@ -5,6 +5,7 @@ import { usePostRegistrationMutation } from '@/src/redux/api/auth';
 import { Button, Checkbox, Input } from 'antd';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import logo from '@/src/assets/logo.png';
+import { Link } from 'react-router-dom';
 
 interface IFormInput {
 	userName: string;
@@ -154,6 +155,14 @@ const RegistrationPage = () => {
 						handleRememberMeChange={handleRememberMeChange}
 						onSubmit={onSubmit}
 					/>
+					<div className={scss.links}>
+						<Link to="/auth/login" className={scss.link}>
+							Уже есть аккаунт?
+						</Link>
+						<Link to="/auth/forgot" className={scss.link}>
+							Забыли пароль?
+						</Link>
+					</div>
 				</div>
 			</div>
 		</section>

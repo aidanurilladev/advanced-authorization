@@ -3,6 +3,7 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { usePostForgotPasswordMutation } from '@/src/redux/api/auth';
 import { Button, Input } from 'antd';
 import logo from '@/src/assets/logo.png';
+import { Link } from 'react-router-dom';
 
 interface IFormInput {
 	email: string;
@@ -77,6 +78,14 @@ const ForgotPage = () => {
 						errors={errors}
 						onSubmit={onSubmit}
 					/>
+					<div className={scss.links}>
+						<Link to="/auth/registration" className={scss.link}>
+							У вас нет аккаунта?
+						</Link>
+						<Link to="/auth/login" className={scss.link}>
+							Уже вспомнил пароль от аккаунта?
+						</Link>
+					</div>
 				</div>
 			</div>
 		</section>
