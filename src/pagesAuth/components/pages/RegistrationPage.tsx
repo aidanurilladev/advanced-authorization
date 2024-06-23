@@ -130,9 +130,12 @@ const RegistrationPage = () => {
 
 		try {
 			const response = await postRegisterMutation(userDataRest);
-			if (response.data?.message) {
+			if (response.data?.accessToken) {
 				const storage = rememberMe ? localStorage : sessionStorage;
-				storage.setItem('accessToken', JSON.stringify(response.data.message));
+				storage.setItem(
+					'accessToken',
+					JSON.stringify(response.data.accessToken)
+				);
 				window.location.reload();
 			}
 		} catch (e) {
