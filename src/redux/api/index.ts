@@ -16,8 +16,8 @@ const baseQuery = fetchBaseQuery({
 			headers.set('Authorization', `Bearer ${token}`);
 		}
 		return headers;
-	},
-	credentials: 'include'
+	}
+	// credentials: 'include'
 });
 
 const baseQueryExtended: BaseQueryFn = async (args, api, extraOptions) => {
