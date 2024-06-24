@@ -153,6 +153,7 @@ const RegistrationPage = () => {
 	const password = watch('password');
 
 	return (
+		
 		<section className={scss.RegistrationPage}>
 			<ToastContainer />
 			<div className="container">
