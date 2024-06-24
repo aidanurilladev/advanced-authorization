@@ -6,6 +6,7 @@ import { Button, Checkbox, Input } from 'antd';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import logo from '@/src/assets/logo.png';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 interface IFormInput {
 	userName: string;
@@ -136,9 +137,15 @@ const RegistrationPage = () => {
 					'accessToken',
 					JSON.stringify(response.data.accessToken)
 				);
-				window.location.reload();
+				toast.success('Успешная регистрация');
+				setTimeout(() => {
+					window.location.reload();
+				}, 4000);
+			} else {
+				toast.error('Ошибка при регистрации');
 			}
 		} catch (e) {
+			toast.error('Произошла ошибка');
 			console.error('An error occurred:', e);
 		}
 	};
@@ -147,6 +154,7 @@ const RegistrationPage = () => {
 
 	return (
 		<section className={scss.RegistrationPage}>
+			<ToastContainer />
 			<div className="container">
 				<div className={scss.content}>
 					<img className={scss.logo} src={logo} alt="logo" />

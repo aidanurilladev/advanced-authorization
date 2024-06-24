@@ -4,6 +4,7 @@ import { Button, Input } from 'antd';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { usePatchResetPasswordMutation } from '@/src/redux/api/auth';
 import logo from '@/src/assets/logo.png';
+import { ToastContainer, toast } from 'react-toastify';
 
 interface IFormInput {
 	newPassword: string;
@@ -34,7 +35,11 @@ const ResetPasswordForm = ({
 	password,
 	onSubmit
 }: any) => (
-	<form onSubmit={handleSubmit(onSubmit)}>
+	<form
+		onSubmit={() => {
+			handleSubmit(onSubmit);
+		}}
+	>
 		<PasswordField
 			name="newPassword"
 			control={control}
@@ -73,7 +78,7 @@ const ResetPasswordPage = () => {
 
 	const onSubmit: SubmitHandler<IFormInput> = async (userData) => {
 		if (!token) {
-			alert('Токен не найден');
+			toast.error('Токен не найден');
 			return;
 		}
 
@@ -83,10 +88,13 @@ const ResetPasswordPage = () => {
 				newPassword: userData.newPassword
 			});
 			if (response.data?.message) {
-				alert(response.data.message);
+				toast.success(response.data.message);
 				navigate('/auth/login');
+			} else {
+				toast.error('Ошибка при сбросе пароля');
 			}
 		} catch (e) {
+			toast.error('Произошла ошибка');
 			console.error('An error occurred:', e);
 		}
 	};
@@ -95,6 +103,7 @@ const ResetPasswordPage = () => {
 
 	return (
 		<section className={scss.ResetPasswordPage}>
+			    <ToastContainer />
 			<div className="container">
 				<div className={scss.content}>
 					<img className={scss.logo} src={logo} alt="logo" />

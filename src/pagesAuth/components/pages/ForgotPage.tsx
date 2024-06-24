@@ -4,6 +4,7 @@ import { usePostForgotPasswordMutation } from '@/src/redux/api/auth';
 import { Button, Input } from 'antd';
 import logo from '@/src/assets/logo.png';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 interface IFormInput {
 	email: string;
@@ -59,10 +60,13 @@ const ForgotPage = () => {
 			};
 			const response = await postForgotPasswordMutation(forgotData);
 			if (response.data?.message) {
-				alert(response.data.message);
+				toast.success(response.data.message);
 				reset();
+			} else {
+				toast.error('Ошибка при отправке запроса на восстановление пароля');
 			}
 		} catch (e) {
+			toast.error('Произошла ошибка при отправке запроса');
 			console.error('An error occurred:', e);
 		}
 	};
@@ -88,6 +92,7 @@ const ForgotPage = () => {
 					</div>
 				</div>
 			</div>
+			<ToastContainer />
 		</section>
 	);
 };
